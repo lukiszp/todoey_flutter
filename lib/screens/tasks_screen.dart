@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,7 +29,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   const Text('Todoey', style: mainAppTextStyle),
-                  Text('${Provider.of<TaskData>(context).tasks.length} Tasks',
+                  Text('${Provider.of<TaskData>(context).taskCount} Tasks',
                       style: const TextStyle(
                           color: kMainBackgroundColor, fontSize: 18)),
                 ],
@@ -38,8 +38,8 @@ class TasksScreen extends StatelessWidget {
             Expanded(
               child: Container(
                 decoration: mainBoxDecoration,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TasksList(),
+                // padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: const TasksList(),
               ),
             ),
           ],
@@ -54,12 +54,7 @@ class TasksScreen extends StatelessWidget {
                           child: Container(
                         padding: EdgeInsets.only(
                             bottom: MediaQuery.of(context).viewInsets.bottom),
-                        child: AddTaskScreen(
-                          addTaskCallback: (newTaskTitle) {
-                              Provider.of<TaskData>(context, listen: false).addTask(newTaskTitle);
-                            Navigator.pop(context);
-                          },
-                        ),
+                        child: AddTaskScreen(),
                       )));
             },
             backgroundColor: kMainAccentColor,

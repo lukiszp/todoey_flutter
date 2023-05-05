@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:todoey_flutter/models/task_data.dart';
 import 'package:todoey_flutter/widgets/tasks_list.dart';
 import '../constant.dart';
 import 'add_task_screen.dart';
+import 'package:provider/provider.dart';
 
 class TasksScreen extends StatelessWidget {
-  TasksScreen({super.key});
-
+  const TasksScreen({super.key});
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,17 +21,17 @@ class TasksScreen extends StatelessWidget {
                   top: 60, bottom: 30, left: 30, right: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  CircleAvatar(
+                children: [
+                  const CircleAvatar(
                     backgroundColor: kMainBackgroundColor,
                     radius: 35,
                     child: Icon(Icons.list, size: 50, color: kMainAccentColor),
                   ),
-                  SizedBox(height: 10),
-                  Text('Todoey', style: mainAppTextStyle),
-                  Text('12 Tasks',
-                      style:
-                          TextStyle(color: kMainBackgroundColor, fontSize: 18)),
+                  const SizedBox(height: 10),
+                  const Text('Todoey', style: mainAppTextStyle),
+                  Text('${Provider.of<TaskData>(context).tasks.length} Tasks',
+                      style: const TextStyle(
+                          color: kMainBackgroundColor, fontSize: 18)),
                 ],
               ),
             ),
@@ -52,7 +54,12 @@ class TasksScreen extends StatelessWidget {
                           child: Container(
                         padding: EdgeInsets.only(
                             bottom: MediaQuery.of(context).viewInsets.bottom),
-                        child: AddTaskScreen(),
+                        child: AddTaskScreen(
+                          addTaskCallback: (newTaskTitle) {
+                              Provider.of<TaskData>(context, listen: false).addTask(newTaskTitle);
+                            Navigator.pop(context);
+                          },
+                        ),
                       )));
             },
             backgroundColor: kMainAccentColor,

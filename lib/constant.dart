@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 const kMainAccentColor = Colors.lightBlueAccent;
 const kMainBackgroundColor = Colors.white;
+const kMainTextColor = Colors.black;
 
 const mainAppTextStyle = TextStyle(
   color: kMainBackgroundColor,
@@ -17,9 +18,6 @@ const mainBoxDecoration = BoxDecoration(
   ),
 );
 
-const kListTextStyle = TextStyle(color: Colors.black, fontSize: 20);
+const kListTextStyle = TextStyle(color: kMainTextColor, fontSize: 20);
 
-const kAddTaskTextStyle =
-    TextStyle(color: Colors.lightBlueAccent, fontSize: 30);
-
-// const kAddButtonStyle = ;
+const kAddTaskTextStyle = TextStyle(color: kMainAccentColor, fontSize: 30);
